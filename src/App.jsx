@@ -1,10 +1,10 @@
 import React from 'react'
-import { AppRouters } from './routers/AppRouters'
+import { AppRouter } from './routers/AppRouter'
 
 export const App = () => {
   return (
-    <div>
-      <AppRouters />
-    </div>
+    <>
+      <AppRouter />
+    </>
   )
 }
