@@ -1,21 +1,26 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm'
+import { checkingAuthentication, googleSignIn } from '../../store/auth/thunks';
 
     const formData = {
         email: 'edgarjoaquin@gmail.com',
-        password: '123456'
+        password: '123456',
     }
 
 
 export const LoginPages = () => {
 
-    const [ email, password, onInputChange ] = useForm(formData);
+    const dispatch = useDispatch();
+
+    const { email, password, onInputChange } = useForm(formData);
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('handleSubmit')
+        dispatch(checkingAuthentication())
     }
     const onGoogleSignIn = () => {
+        dispatch(googleSignIn())
         console.log('login with google')
     }
 
