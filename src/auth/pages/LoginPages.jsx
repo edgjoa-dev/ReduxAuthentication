@@ -2,8 +2,7 @@ import React, { useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm'
 import { checkingAuthentication, googleSignIn } from '../../store/auth/thunks';
-import Button from '@mui/material/Button';
-import { ButtonGroup, Grid } from '@mui/material';
+import '../../styles/authStyles/main.scss';
 
 
     const formData = {
@@ -30,30 +29,13 @@ export const LoginPages = () => {
     }
 
     return (
-        <div>
-            <Grid container
-                sx={{
-                    justifyContent: 'center',
-                    backgroundColor: '#f5f5f5',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    minHeight: '100vh',
-                }}
+        <div className='login__container-general' >
+            <form
+                className='form__container'
+                onSubmit={handleSubmit}
             >
-                <Grid item
-                    sx={{
-                        alignItems: 'center',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        minHeight: '100vh',
-                        justifyContent: 'center',
-                        backgroundColor: '#495C83',
-                        width: '100%',
-                    }}
-                >
-            <form onSubmit={handleSubmit}>
                 <input
+                className='form__input-text'
                 type="email"
                 name="email"
                 value={email}
@@ -61,16 +43,15 @@ export const LoginPages = () => {
                 onChange={onInputChange}
                 />
                 <input
+                className='form__input-text'
                 type="password"
                 name="password"
                 value={password}
                 placeholder="password"
                 onChange={onInputChange}
                 />
-                <ButtonGroup
-                    orientation="vertical"
-                >
-                    <Button
+                    <button
+                        className='button_submit'
                         variant="contained"
                         type='submit'
                         disabled={isAuthenticating}
@@ -79,20 +60,17 @@ export const LoginPages = () => {
                         }}
                     >
                         Login
-                    </Button>
+                    </button>
 
-                    <Button
-                        variant="contained"
+                    <button
+                        className='button_submit'
                         type="submit"
                         onClick={onGoogleSignIn}
                         disabled={isAuthenticating}
                     >
                         Login Google
-                    </Button>
-                </ButtonGroup>
+                    </button>
             </form>
-            </Grid>
-            </Grid>
         </div>
     )
 }

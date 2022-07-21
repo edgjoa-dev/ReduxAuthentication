@@ -1,0 +1,19 @@
+.button_submit{
+    width: 40vw;
+    margin: .1rem;
+    border: 0px;
+    border-radius: 4px;
+    padding: .5rem;
+    background-color: $primary;
+    color: $primary_text;
+    transition: .4s ease-in-out;
+    width: 15vw;
+    margin: .2rem;
+
+    &:hover{
+        background-color: $color_opacity;
+        color: $secundary_text;
+        transform: translateY(-1px);
+        box-shadow:  0px 0px 5px 5px rgba(0,0,0,0.1);
+    }
+}
