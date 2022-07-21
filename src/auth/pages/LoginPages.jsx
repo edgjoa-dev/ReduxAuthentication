@@ -16,11 +16,11 @@ export const LoginPages = () => {
     const { email, password, onInputChange } = useForm(formData);
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault() //proviene de thunks.js
         dispatch(checkingAuthentication())
     }
     const onGoogleSignIn = () => {
-        dispatch(googleSignIn())
+        dispatch(googleSignIn()) //proviene de thunks.js
         console.log('login with google')
     }
 
@@ -29,14 +29,14 @@ export const LoginPages = () => {
             <h1>LoginPages</h1>
             <form onSubmit={handleSubmit}>
                 <input
-                type="text"
+                type="email"
                 name="email"
                 value={email}
                 placeholder="email"
                 onChange={onInputChange}
                 />
                 <input
-                type="text"
+                type="password"
                 name="password"
                 value={password}
                 placeholder="password"
@@ -49,7 +49,9 @@ export const LoginPages = () => {
                 <button
                     type="submit"
                     onClick={onGoogleSignIn}
-                >Login Google</button>
+                >
+                    Login Google
+                </button>
             </form>
         </div>
     )
