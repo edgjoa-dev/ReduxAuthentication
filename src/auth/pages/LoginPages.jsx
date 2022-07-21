@@ -54,10 +54,6 @@ export const LoginPages = () => {
                         className='button_submit'
                         variant="contained"
                         type='submit'
-                        disabled={isAuthenticating}
-                        sx={{
-                            margin: '.6rem',
-                        }}
                     >
                         Login
                     </button>
@@ -66,7 +62,6 @@ export const LoginPages = () => {
                         className='button_submit'
                         type="submit"
                         onClick={onGoogleSignIn}
-                        disabled={isAuthenticating}
                     >
                         Login Google
                     </button>

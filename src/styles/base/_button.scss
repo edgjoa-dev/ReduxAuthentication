@@ -1,14 +1,13 @@
 .button_submit{
-    width: 40vw;
     margin: .1rem;
     border: 0px;
     border-radius: 4px;
-    padding: .5rem;
+    padding: .8rem;
     background-color: $primary;
     color: $primary_text;
     transition: .4s ease-in-out;
-    width: 15vw;
-    margin: .2rem;
+    margin: .3rem;
+    width: 10vw;
 
     &:hover{
         background-color: $color_opacity;

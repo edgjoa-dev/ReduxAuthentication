@@ -1,8 +1,39 @@
-@media screen and (min-width: 750px) {
+@media screen and (max-width: 1080px) {
     .login__container-general{
-        background-color: aqua;
     }
     .form__container{
-        width: 30vw;
+        width: 70vw;
+    }
+}
+@media screen and (min-width: 760px) {
+    .login__container-general{
+        background-color: aqua;
+        font-size: small;
+        color: aquamarine;
+    }
+    .form__container{
+        width: 40vw;
+        height: 10vh;
+    }
+}
+@media screen and (min-width: 480px) {
+    .login__container-general{
+        width: 70vw;
+        height: 40vh;
+    }
+    .form__container{
+        width: 60vw;
+    }
+}
+@media screen and (min-width: 280px) {
+    .login__container-general{
+        width: 70vw;
+    }
+    .form__container{
+        width: 60vw;
+    }
+    .button_submit{
+        width: 20vw;
+        font-size: 9px;
     }
 }
