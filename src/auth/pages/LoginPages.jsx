@@ -1,5 +1,5 @@
-import React from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useMemo } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm'
 import { checkingAuthentication, googleSignIn } from '../../store/auth/thunks';
 
@@ -11,9 +11,11 @@ import { checkingAuthentication, googleSignIn } from '../../store/auth/thunks';
 
 export const LoginPages = () => {
 
+    const { status } = useSelector(state => state.auth )
     const dispatch = useDispatch();
 
     const { email, password, onInputChange } = useForm(formData);
+    const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
     const handleSubmit = (e) => {
         e.preventDefault() //proviene de thunks.js
@@ -49,6 +51,7 @@ export const LoginPages = () => {
                 <button
                     type="submit"
                     onClick={onGoogleSignIn}
+                    disabled={isAuthenticating}
                 >
                     Login Google
                 </button>

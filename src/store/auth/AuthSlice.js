@@ -20,13 +20,15 @@ initialState: {
             state.email = payload.email
             state.displayName = payload.displayName
             state.photoURL = payload.photoURL
+            state.errorMessage = null
         },
         logout: (state, {payload}) => {
-            state.status = 'notAuthenticated'
+            state.status = 'not-Authenticated'
             state.uid = null
             state.email = null
             state.displayName = null
             state.photoURL = null
+            state.errorMessage = payload.errorMessage
         },
         checkingCredentials: (state) => {
             state.status = 'checking-Credentials'
