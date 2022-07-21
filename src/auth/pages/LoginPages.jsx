@@ -2,6 +2,9 @@ import React, { useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm'
 import { checkingAuthentication, googleSignIn } from '../../store/auth/thunks';
+import Button from '@mui/material/Button';
+import { ButtonGroup, Grid } from '@mui/material';
+
 
     const formData = {
         email: 'edgarjoaquin@gmail.com',
@@ -28,7 +31,27 @@ export const LoginPages = () => {
 
     return (
         <div>
-            <h1>LoginPages</h1>
+            <Grid container
+                sx={{
+                    justifyContent: 'center',
+                    backgroundColor: '#f5f5f5',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    minHeight: '100vh',
+                }}
+            >
+                <Grid item
+                    sx={{
+                        alignItems: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        minHeight: '100vh',
+                        justifyContent: 'center',
+                        backgroundColor: '#495C83',
+                        width: '100%',
+                    }}
+                >
             <form onSubmit={handleSubmit}>
                 <input
                 type="email"
@@ -44,18 +67,32 @@ export const LoginPages = () => {
                 placeholder="password"
                 onChange={onInputChange}
                 />
-                <button
-                    type="submit"
-                >Login</button>
-
-                <button
-                    type="submit"
-                    onClick={onGoogleSignIn}
-                    disabled={isAuthenticating}
+                <ButtonGroup
+                    orientation="vertical"
                 >
-                    Login Google
-                </button>
+                    <Button
+                        variant="contained"
+                        type='submit'
+                        disabled={isAuthenticating}
+                        sx={{
+                            margin: '.6rem',
+                        }}
+                    >
+                        Login
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        onClick={onGoogleSignIn}
+                        disabled={isAuthenticating}
+                    >
+                        Login Google
+                    </Button>
+                </ButtonGroup>
             </form>
+            </Grid>
+            </Grid>
         </div>
     )
 }

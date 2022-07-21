@@ -17,7 +17,7 @@ export const googleSignIn = ( ) => {
         dispatch( checkingCredentials() )
 
         const result = await singInWhitGoogle() //viene del provider store
-        if(!result.ok) return dispatch( logout( result.errorMessage ) )
+        if(!result.ok) return dispatch( logout( result.errorMessage ) );
 
         dispatch( login( result ) )
 
