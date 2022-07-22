@@ -32,7 +32,7 @@ export const useForm = ( initialForm = {}, formValidations = {} ) => {
         setFormState( initialForm );
     }
 
-    const createValidators = ()=>{
+    const createValidators = () => {
 
         const formCheckedValues = {};
 
@@ -47,10 +47,10 @@ export const useForm = ( initialForm = {}, formValidations = {} ) => {
 
     return {
         ...formState,
+        ...formValidation,
         formState,
         onInputChange,
         onResetForm,
-        ...formValidation,
         isFormValid,
     }
 }

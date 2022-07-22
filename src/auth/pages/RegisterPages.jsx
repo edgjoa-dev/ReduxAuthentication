@@ -1,9 +1,11 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm'
 import { checkingAuthentication, } from '../../store/auth/thunks';
 import  {Link} from 'react-router-dom';
 import '../../styles/authStyles/main.scss';
+import TextField from '@mui/material/TextField'
+import Grid from '@mui/material/Grid'
 
 
     const formData = {
@@ -21,49 +23,63 @@ import '../../styles/authStyles/main.scss';
 
 export const RegisterPages = () => {
 
+    const [formSubmitted, setformSubmitted] = useState(false);
+
     const { status } = useSelector(state => state.auth )
     const dispatch = useDispatch();
 
-    const { displayName, displayNameValid, email, emailVlaid, password, passwordValid,  onInputChange, formState, formStateValid } = useForm(formData);
+    const { displayName, displayNameValid, email, emailValid, password, passwordValid,  onInputChange, formState, formStateValid } = useForm(formData, formValidation);
     const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
     const handleSubmit = (e) => {
         e.preventDefault() //proviene de thunks.js
+        if (formStateValid) {
+            dispatch(checkingAuthentication())
+            setformSubmitted(true)
+        }
         dispatch(checkingAuthentication())
     }
 
     return (
-        <div className='login__container-general' >
+        <div>
             <form
-                className='form__container'
                 onSubmit={handleSubmit}
             >
-                <input
-                className='form__input-text'
-                type="text"
-                name="displayName"
-                value={displayName}
-                placeholder="Nombre"
-                onChange={onInputChange}
+            <Grid container>
+                <Grid item xs={12} sx={{ mt: 2 }}>
+                <TextField
+                    error={!!displayNameValid &&  formSubmitted}
+                    helperText={displayNameValid}
+                    label="name"
+                    name="displayName"
+                    onChange={onInputChange}
+                    type='text'
+                    value={displayName}
                 />
-                <input
-                className='form__input-text'
-                type="email"
-                name="email"
-                value={email}
-                placeholder="email"
-                onChange={onInputChange}
+                </Grid>
+                <Grid item xs={12} sx={{ mt: 2 }}>
+                <TextField
+                    error={!!emailValid &&  formSubmitted}
+                    helperText={emailValid}
+                    label="email"
+                    name="email"
+                    onChange={onInputChange}
+                    type='email'
+                    value={email}
                 />
-                <input
-                className='form__input-text'
-                type="password"
-                name="password"
-                value={password}
-                placeholder="password"
-                onChange={onInputChange}
+                </Grid>
+                <Grid item xs={12} sx={{ mt: 2 }}>
+                <TextField
+                    error={!!passwordValid &&  formSubmitted}
+                    helperText={passwordValid}
+                    label="password"
+                    name="password"
+                    onChange={onInputChange}
+                    type='password'
+                    value={password}
                 />
+                </Grid>
                     <button
-                        className='button_submit'
                         variant="contained"
                         type='submit'
                         disabled={isAuthenticating}
@@ -73,6 +89,7 @@ export const RegisterPages = () => {
                     <Link to='/auth/login'>
                         ¿Ya Tienes una Cuenta?
                     </Link>
+                </Grid>
             </form>
         </div>
     )
