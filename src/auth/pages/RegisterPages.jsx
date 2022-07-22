@@ -3,15 +3,14 @@ import { startCreatingUserWithEmailPassword } from '../../store/auth/thunks';
 import { useForm } from '../../hooks/useForm'
 import { useSelector, useDispatch } from 'react-redux';
 import  {Link} from 'react-router-dom';
-import TextField from '@mui/material/TextField'
-import { Alert, Button } from '@mui/material'
+import { Alert, Button, Grid, TextField } from '@mui/material'
 import '../../styles/authStyles/main.scss';
 
 
     const formData = {
         displayName: 'Edgar Joaquin Flores',
         email: 'edgarjoaquin@gmail.com',
-        password: '123456',
+        password: '123456789',
     }
 
     const formValidation = {
