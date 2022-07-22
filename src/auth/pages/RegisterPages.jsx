@@ -7,9 +7,15 @@ import '../../styles/authStyles/main.scss';
 
 
     const formData = {
-        name: 'Edgar Joaquin Flores',
+        displayName: 'Edgar Joaquin Flores',
         email: 'edgarjoaquin@gmail.com',
         password: '123456',
+    }
+
+    const formValidation = {
+        email: [(value) => value.includes('@gmail.com'), 'El email no es valido'],
+        password: [(value) => value.length >= 8, 'El password debe tener almenos 8 caracteres'],
+        displayName: [(value) => value.length >= 2, 'Nombre invalido'],
     }
 
 
@@ -18,7 +24,7 @@ export const RegisterPages = () => {
     const { status } = useSelector(state => state.auth )
     const dispatch = useDispatch();
 
-    const { name, email, password, onInputChange } = useForm(formData);
+    const { displayName, displayNameValid, email, emailVlaid, password, passwordValid,  onInputChange, formState, formStateValid } = useForm(formData);
     const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
     const handleSubmit = (e) => {
@@ -34,9 +40,9 @@ export const RegisterPages = () => {
             >
                 <input
                 className='form__input-text'
-                type="name"
-                name="name"
-                value={name}
+                type="text"
+                name="displayName"
+                value={displayName}
                 placeholder="Nombre"
                 onChange={onInputChange}
                 />
