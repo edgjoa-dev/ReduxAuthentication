@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm'
 import { checkingAuthentication, googleSignIn } from '../../store/auth/thunks';
+import { Link } from 'react-router-dom';
 import '../../styles/authStyles/main.scss';
 
 
@@ -54,6 +55,7 @@ export const LoginPages = () => {
                         className='button_submit'
                         variant="contained"
                         type='submit'
+                        disabled={isAuthenticating}
                     >
                         Login
                     </button>
@@ -62,9 +64,13 @@ export const LoginPages = () => {
                         className='button_submit'
                         type="submit"
                         onClick={onGoogleSignIn}
+                        disabled={isAuthenticating}
                     >
                         Login Google
                     </button>
+                    <Link to='/auth/register'>
+                        ¿Aun no Tienes una Cuenta?
+                    </Link>
             </form>
         </div>
     )
