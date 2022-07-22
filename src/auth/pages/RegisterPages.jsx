@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { startCreatingUserWithEmailPassword } from '../../store/auth/thunks';
 import { useForm } from '../../hooks/useForm'
-import { checkingAuthentication, } from '../../store/auth/thunks';
+import { useSelector, useDispatch } from 'react-redux';
 import  {Link} from 'react-router-dom';
-import '../../styles/authStyles/main.scss';
 import TextField from '@mui/material/TextField'
-import Grid from '@mui/material/Grid'
+import { Alert, Button } from '@mui/material'
+import '../../styles/authStyles/main.scss';
 
 
     const formData = {
@@ -23,21 +23,28 @@ import Grid from '@mui/material/Grid'
 
 export const RegisterPages = () => {
 
-    const [formSubmitted, setformSubmitted] = useState(false);
-
-    const { status } = useSelector(state => state.auth )
     const dispatch = useDispatch();
+    const [formSubmitted, setformSubmitted] = useState(false);
+    const { status, errorMessage } = useSelector( state => state.auth );
+    const isCheckingAuthentication = useMemo(() => status === 'checking', [status])
 
-    const { displayName, displayNameValid, email, emailValid, password, passwordValid,  onInputChange, formState, formStateValid } = useForm(formData, formValidation);
-    const isAuthenticating = useMemo(() => status === 'checking', [status]);
+    const { displayName,
+        displayNameValid,
+        email,
+        emailValid,
+        password,
+        passwordValid,
+        onInputChange,
+        formState,
+        formStateValid
+    } = useForm(formData, formValidation);
 
     const handleSubmit = (e) => {
-        e.preventDefault() //proviene de thunks.js
-        if (formStateValid) {
-            dispatch(checkingAuthentication())
-            setformSubmitted(true)
-        }
-        dispatch(checkingAuthentication())
+        e.preventDefault();
+        setformSubmitted(true)
+
+        if(!formStateValid) return;
+        dispatch(startCreatingUserWithEmailPassword(formState));
     }
 
     return (
@@ -78,14 +85,24 @@ export const RegisterPages = () => {
                     type='password'
                     value={password}
                 />
+
+                <Grid
+                    item
+                    xs={12}
+                    display={ !!errorMessage ? '' : 'none' }
+                    >
+                        <Alert severity='error'>{errorMessage}</Alert>
                 </Grid>
-                    <button
+
+
+                </Grid>
+                    <Button
                         variant="contained"
                         type='submit'
-                        disabled={isAuthenticating}
+                        disabled={isCheckingAuthentication}
                     >
                         Crear Cuenta
-                    </button>
+                    </Button>
                     <Link to='/auth/login'>
                         ¿Ya Tienes una Cuenta?
                     </Link>

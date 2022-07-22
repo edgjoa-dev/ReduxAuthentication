@@ -26,3 +26,47 @@ export const singInWhitGoogle  = async() => {
         }
     }
 }
+
+export const registerUserWithEmailPassword = async({ email, password, displayName }) => {
+
+    try {
+
+        const res = await createUserWithEmailAndPassword( FirebaseAuth, email, password, );
+        const { uid, photoURL } = res.user;
+        console.log(res);
+        await updateProfile(FirebaseAuth.currentUser, { displayName })
+
+        return {
+            ok:true,
+            uid, email, photoURL, displayName
+        }
+
+    } catch (error) {
+        console.log(error);
+        return { ok:false, errorMessage: error.message}
+    }
+}
+
+export const loginWithEmailPassword = async({email, password}) => {
+    try {
+        const resp = await signInWithEmailAndPassword(FirebaseAuth, email, password);
+        const { uid, photoURL, displayName } = resp.user;
+        return {
+            ok: true,
+            uid, photoURL, displayName
+        }
+
+    } catch (error) {
+        console.log(error);
+        return {
+            ok:false,
+            errorMessage: error.message
+        }
+    }
+}
+
+export const logutFirebase = async() => {
+
+    return await FirebaseAuth.signOut();
+
+}
